@@ -4,6 +4,7 @@ import { inlineButton, inlineKeyboard, registerMainMenuItem } from "../toolkit/i
 import { createInvite, isAdmin, revokeStaff, staffIds } from "../lib/access.js";
 import { read, remove, write } from "../lib/store.js";
 import { dateLabel, now } from "../lib/time.js";
+import type { Submission } from "./create.js";
 
 registerMainMenuItem({ label: "Manage workspace", data: "admin:open", order: 30 });
 const composer = new Composer<Ctx>();
@@ -118,10 +119,21 @@ composer.callbackQuery("admin:logs", async (ctx) => {
   const cutoff = now().getTime() - retention * 86400000;
   const recent: string[] = [];
   for (const id of ids) {
-    const item = await read<{ timestamp: number; full_name: string }>(`submission:${id}`);
-    if (item && item.timestamp >= cutoff) recent.push(`${item.full_name} — ${dateLabel(item.timestamp)}`);
+    const item = await read<Submission>(`submission:${id}`);
+    if (item && item.timestamp >= cutoff) recent.push(`${item.full_name} — ${dateLabel(item.timestamp)}${item.flagged ? " — FLAGGED" : ""}`);
   }
   await ctx.reply(recent.length ? `Recent submissions:\n${recent.slice(-20).join("\n")}` : "No submissions yet — create an ID to add the first record.");
+});
+
+composer.callbackQuery(/^report:(.+)$/, async (ctx) => {
+  await ctx.answerCallbackQuery();
+  if (!(await guard(ctx))) return;
+  const id = ctx.match[1];
+  const submission = await read<Submission>(`submission:${id}`);
+  if (!submission) { await ctx.reply("That submission is no longer available."); return; }
+  submission.flagged = true;
+  await write(`submission:${id}`, submission);
+  await ctx.reply("This submission is now flagged for review.");
 });
 
 export default composer;

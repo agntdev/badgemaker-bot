@@ -1,20 +1,3 @@
 [
-  {
-    "name": "Create ID rejects a user without staff access",
-    "steps": [
-      {
-        "expect": [
-          {
-            "method": "sendMessage",
-            "payload": {
-              "text": "You don't have access to this ID workspace. Ask an administrator for an invite."
-            }
-          }
-        ],
-        "send": {
-          "callback": "create:start"
-        }
-      }
-    ]
-  }
+  {"name":"Create ID starts a public submission","steps":[{"send":{"callback":"create:start"},"expect":[{"method":"sendMessage","payload":{"text":"Send the photo you want on the ID card."}}]}]}
 ]

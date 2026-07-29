@@ -1,20 +1,13 @@
 [
   {
-    "name": "/create rejects a user without staff access",
-    "steps": [
-      {
-        "expect": [
-          {
-            "method": "sendMessage",
-            "payload": {
-              "text": "You don't have access to this ID workspace. Ask an administrator for an invite."
-            }
-          }
-        ],
-        "send": {
-          "text": "/create"
-        }
-      }
+    "name":"/create collects required fields and consent",
+    "steps":[
+      {"send":{"text":"/create"},"expect":[{"method":"sendMessage","payload":{"text":"Send the photo you want on the ID card."}}]},
+      {"send":{"update":{"update_id":20,"message":{"message_id":20,"date":0,"chat":{"id":1,"type":"private","first_name":"Test"},"from":{"id":1,"is_bot":false,"first_name":"Test"},"photo":[{"file_id":"photo-file","file_unique_id":"photo-unique","width":90,"height":90}]}}},"expect":[{"method":"sendMessage","payload":{"text":"Enter the full name exactly as it should appear."}}]},
+      {"send":{"text":"Morgan Lee"},"expect":[{"method":"sendMessage","payload":{"text":"Add an optional field, or continue without one."}}]},
+      {"send":{"callback":"create:fields:done"},"expect":[{"method":"sendMessage","payload":{"text":"Choose the ID layout."}}]},
+      {"send":{"callback":"create:template:0"},"expect":[{"method":"sendMessage","payload":{"text":"Review this sample ID image:\nName: Morgan Lee\nLayout: simple\n\nI confirm I have the right to create and use this ID-style image and will not use it for illegal purposes."}}]},
+      {"send":{"callback":"create:consent:yes"},"expect":[{"method":"sendMessage","payload":{"text":"Consent recorded. Submit this watermarked sample ID image when you are ready."}}]}
     ]
   }
 ]

@@ -23,15 +23,14 @@ export async function isAdmin(ctx: Ctx): Promise<boolean> {
 }
 
 export async function isAuthorized(ctx: Ctx): Promise<boolean> {
-  if (!ctx.from) return false;
-  if (await isAdmin(ctx)) return true;
-  const staff = (await read<number[]>(STAFF_INDEX)) ?? [];
-  return staff.includes(ctx.from.id);
+  // This workspace is public. Staff membership still governs owner controls,
+  // but every Telegram user may create a clearly labelled demonstration card.
+  return Boolean(ctx.from);
 }
 
 export async function requireAuthorized(ctx: Ctx): Promise<boolean> {
   if (await isAuthorized(ctx)) return true;
-  await ctx.reply("You don't have access to this ID workspace. Ask an administrator for an invite.");
+  await ctx.reply("Open this bot in a private chat to create an ID-style image.");
   return false;
 }
 

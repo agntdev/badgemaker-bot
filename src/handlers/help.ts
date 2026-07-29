@@ -9,8 +9,8 @@ import { inlineButton, inlineKeyboard } from "../toolkit/index.js";
 const composer = new Composer<Ctx>();
 
 const HELP =
-  "Use Create ID to submit a photo and the exact details for an ID card.\n\n" +
-  "Use /start for the menu, /create to begin, or /cancel to stop a draft. Your administrator can provide staff access and review submitted cards.";
+  "Use Create ID to submit your own photo and the exact details for a sample card. You must confirm your right to use it before it is made.\n\n" +
+  "Every image is watermarked, kept for audit, and reviewed by staff. You can make up to five submissions in 24 hours, with 30 minutes between them. Use /start for the menu, /create to begin, or /cancel to stop a draft.";
 
 const backToMenu = inlineKeyboard([[inlineButton("⬅️ Back to menu", "menu:main")]]);
 
