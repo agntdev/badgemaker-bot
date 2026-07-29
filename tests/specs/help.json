@@ -8,7 +8,7 @@
           {
             "method": "sendMessage",
             "payload": {
-              "text": "ℹ️ Tap /start to open the menu, then pick what you want from the buttons.\n\nEverything in this bot is reachable by tapping — you don't need to remember any commands."
+              "text": "Use Create ID to submit a photo and the exact details for an ID card.\n\nUse /start for the menu, /create to begin, or /cancel to stop a draft. Your administrator can provide staff access and review submitted cards."
             }
           }
         ]

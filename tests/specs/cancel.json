@@ -1,0 +1,16 @@
+[
+  {
+    "name": "/cancel clears an ID draft",
+    "steps": [
+      {
+        "send": { "text": "/cancel" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": { "text": "ID creation was cancelled. You can start again from the menu." }
+          }
+        ]
+      }
+    ]
+  }
+]

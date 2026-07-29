@@ -1,13 +1,13 @@
 [
   {
-    "name": "Create ID",
+    "name": "Create ID rejects a user without staff access",
     "steps": [
       {
         "expect": [
           {
             "method": "sendMessage",
             "payload": {
-              "text": "Initiate ID creation flow"
+              "text": "You don't have access to this ID workspace. Ask an administrator for an invite."
             }
           }
         ],
