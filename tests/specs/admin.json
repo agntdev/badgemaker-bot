@@ -1,0 +1,16 @@
+[
+  {
+    "name": "workspace controls reject a non-administrator",
+    "steps": [
+      {
+        "send": { "callback": "admin:open" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": { "text": "Only an administrator can manage this workspace." }
+          }
+        ]
+      }
+    ]
+  }
+]
