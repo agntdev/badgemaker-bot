@@ -4,7 +4,7 @@
 
 **Voice:** professional and concise — write every user-facing message, button label, error, and empty state in this voice.
 
-A secure Telegram bot that creates ID-style images using only user-submitted photos and text fields. Submissions are stored for audit and re-download, and copies are forwarded to admin/staff chats with metadata. No auto-generated data or public access.
+A public Telegram bot that creates watermarked, demonstration-only ID-style images using only user-submitted photos and text fields. Submissions are stored for audit and re-download, and copies are forwarded to admin/staff chats with metadata. No identity data is generated automatically.
 
 > This is the complete contract for the bot. Implement EVERY entry point, flow, feature, integration, and edge case below. The completeness review checks the bot against this document after each build pass.
 
